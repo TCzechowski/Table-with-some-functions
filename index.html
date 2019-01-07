@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table sorter</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+
+<body>
+    <div class="content-wrapper">
+         <div class="content-input-container">
+            <input type="text" class="search" name="something" placeholder="Search">
+            <div class="datepicker"></div>
+        </div>
+        <div class="content-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th rel="id">id</th>
+                        <th rel="firstName">first name</th>
+                        <th rel="lastName">last name</th>
+                        <th rel="dateOfBirth">date of birth</th>
+                        <th rel="function">function</th>
+                        <th rel="experience">experience</th>
+                    </tr>
+                </thead>
+                <tbody class="suggestions" id="table1">
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+</script>
+<script src="index.js"></script>
+
+</body>
+
+</html>
