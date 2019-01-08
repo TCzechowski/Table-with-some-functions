@@ -19,7 +19,8 @@ fetch(endpoint)
   .then(blob => blob.json())
   .then(data => people.push(...data))
   .then(() => sliceArray(people, 5))
-  .then(() => displayContent(0));
+  .then(() => displayContent(0))
+  .then(() => sortListeners());
 
 function displayContent(page) {
   let suggestions = document.querySelector('.suggestions');
@@ -69,5 +70,27 @@ function switchPage(){
       const pageNumber = this.dataset.page;
       displayContent(pageNumber);
       ;});
+  }
+}
+
+function sortListeners(){
+  const elements = document.querySelectorAll('.table-head');
+
+  for(i=0; i < elements.length; i++){
+    let element = elements[i];
+    element.addEventListener('click', sortArray);
+  }
+}
+
+let result = 1;
+function sortArray(){
+  const elementProperty = this.dataset.property;
+  if (elementProperty === 'dateOfBirth') {
+    console.log('DOB');
+  } else {
+    people.sort((a, b) => a[elementProperty] > b[elementProperty] ? [result] : -[result]);
+    sliceArray(people, 5);
+    displayContent(0);
+    result = -result;
   }
 }

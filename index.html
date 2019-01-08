@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Table sorter</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 
@@ -18,12 +18,12 @@
             <table>
                 <thead>
                     <tr>
-                        <th rel="id">id</th>
-                        <th rel="firstName">first name</th>
-                        <th rel="lastName">last name</th>
-                        <th rel="dateOfBirth">date of birth</th>
-                        <th rel="function">function</th>
-                        <th rel="experience">experience</th>
+                        <th data-property="id" class="table-head">id</th>
+                        <th data-property="firstName" class="table-head">first name</th>
+                        <th data-property="lastName" class="table-head">last name</th>
+                        <th data-property="dateOfBirth" class="table-head">date of birth</th>
+                        <th data-property="function" class="table-head">function</th>
+                        <th data-property="experience" class="table-head">experience</th>
                     </tr>
                 </thead>
                 <tbody class="suggestions" id="table1">

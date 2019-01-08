@@ -1,0 +1,28 @@
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+    line-height: 1.6;
+    background-color: #FA7268;
+    display: flex;
+    justify-content: center;
+}
+
+.content-wrapper {
+    background-color: white;
+    color: #FA7268;
+    padding: 1em;
+    margin-top: 5em;
+    th {
+        color: #FA7268;
+        background-color: #f0f0f0;
+        padding: 0.5em 1em;
+        &:hover {
+            background-color: #FA7268;
+            color: white;
+            cursor: pointer;
+        }
+        &:active {
+            color: black;
+        }
+    }
+}
