@@ -121,3 +121,24 @@ function sortArray() {
   }
 }
 
+function findMatches(wordToMatch, arr) {
+  return filteredPeople = arr.filter(person => {
+    const regex = new RegExp(wordToMatch, 'gi');
+    return person.id.toString().match(regex)
+      || person.firstName.match(regex)
+      || person.lastName.match(regex)
+      || person.dateOfBirth.toString().match(regex)
+      || person.function.match(regex)
+      || person.experience.toString().match(regex)
+  });
+}
+
+function displayMatches(){
+  findMatches(this.value, people);
+  sliceArray(filteredPeople, 5);
+  displayContent(0);
+}
+
+const searchInput = document.querySelector('.search');
+searchInput.addEventListener('keyup', displayMatches, false);
+searchInput.addEventListener('change', displayMatches, true);
