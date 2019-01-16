@@ -12,26 +12,35 @@
 //             $(".search").val(dateText);
 //         }
 // });
-const endpoint = 'https://api.myjson.com/bins/agowj';
+const endpoint = 'https://api.myjson.com/bins/1f4b4c';
 let people = [];
 let sicedPeople = [];
+let filteredPeople;
 fetch(endpoint)
-  .then(blob => blob.json())
-  .then(data => people.push(...data))
-  .then(() => people.map(elem =>
-    elem.dateOfBirth = leadingZero(elem.dateOfBirth)
+.then(blob => blob.json())
+.then(data => people.push(...data))
+.then(() => people.map(elem =>
+  elem.dateOfBirth = leadingZero(elem.dateOfBirth)
   ))
-  .then(() => sliceArray(people, 5))
-  .then(() => displayContent(0))
-  .then(() => sortListeners());
+  .then(() => init());
+
+  function init() {
+    sliceArray(people, 5);
+    displayContent(0);
+    displayMatches();
+  }
 
 
-function leadingZero(element) {
-  const splitElement = element.split('.');
-  return splitElement.map(e => e.length === 1 ? '0' + e : e).join('.');
-}
+  function leadingZero(element) {
+    const splitElement = element.split('.');
+    return splitElement.map(e => e.length === 1 ? '0' + e : e).join('.');
+  }
+  function parseDate(element) {
+    const splitElement = element.split(' ');
+    return splitElement[0].split('.').reverse().join('.') + ' ' + splitElement[1];
+  }
 
-function displayContent(page) {
+  function displayContent(page) {
   let suggestions = document.querySelector('.suggestions');
   let html = slicedPeople[page].map(person => {
     return `
@@ -68,10 +77,10 @@ function createButtons() {
 
     container.appendChild(btn);
   }
-  switchPage();
+  switchPageListeners();
 }
 
-function switchPage() {
+function switchPageListeners() {
   const buttons = document.querySelectorAll('.page-button');
   for (i = 0; i < buttons.length; i++) {
     let button = buttons[i];
@@ -83,39 +92,25 @@ function switchPage() {
   }
 }
 
-function sortListeners() {
-  const elements = document.querySelectorAll('.table-head');
-
-  for (i = 0; i < elements.length; i++) {
-    let element = elements[i];
-    element.addEventListener('click', sortArray);
-  }
-}
-
-function parseDate(element) {
-  const splitElement = element.split(' ');
-  return splitElement[0].split('.').reverse().join('.') + ' ' + splitElement[1];
-}
-
 let result = 1;
 function sortArray() {
   const elementProperty = this.dataset.property;
 
   if (elementProperty === 'dateOfBirth') {
-    people.sort((a, b) => {
+    filteredPeople.sort((a, b) => {
 
       const x = new Date(parseDate(a.dateOfBirth)).getTime();
       const y = new Date(parseDate(b.dateOfBirth)).getTime();
 
       return x > y ? [result] : -[result];
     });
-    sliceArray(people, 5);
+    sliceArray(filteredPeople, 5);
     displayContent(0);
     result = -result;
 
   } else {
-    people.sort((a, b) => a[elementProperty] > b[elementProperty] ? [result] : -[result]);
-    sliceArray(people, 5);
+    filteredPeople.sort((a, b) => a[elementProperty] > b[elementProperty] ? [result] : -[result]);
+    sliceArray(filteredPeople, 5);
     displayContent(0);
     result = -result;
   }
@@ -139,6 +134,35 @@ function displayMatches(){
   displayContent(0);
 }
 
+
+
+function resultsPerPage(){
+  const results = this.value;
+  if (results == /\s/ || results == 0) {
+    sliceArray(filteredPeople, 5);
+    displayContent(0);
+  } else {
+    sliceArray(filteredPeople, results);
+    displayContent(0);
+  }
+}
+
+function sortListeners() {
+  const elements = document.querySelectorAll('.table-head');
+
+  for (i = 0; i < elements.length; i++) {
+    let element = elements[i];
+    element.addEventListener('click', sortArray);
+  }
+}
+
+// EVENT LISTENERS
+document.addEventListener('DOMContentLoaded', sortListeners);
+
 const searchInput = document.querySelector('.search');
-searchInput.addEventListener('keyup', displayMatches, false);
-searchInput.addEventListener('change', displayMatches, true);
+searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('change', displayMatches);
+
+const perPageInput = document.querySelector('.results-per-page');
+perPageInput.addEventListener('keyup', resultsPerPage);
+perPageInput.addEventListener('change', resultsPerPage);
