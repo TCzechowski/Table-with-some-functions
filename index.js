@@ -57,9 +57,10 @@ fetch(endpoint)
   createButtons();
 };
 
-function sliceArray(arr, size) {
+const sliceArray = function (arr, size) {
   slicedPeople = [];
   for (i = 0; i < arr.length; i += size) {
+    console.log(i);
     slicedPeople.push(arr.slice(i, i + size));
   }
   return slicedPeople;
@@ -104,13 +105,13 @@ function sortArray() {
 
       return x > y ? [result] : -[result];
     });
-    sliceArray(filteredPeople, 5);
+    sliceArray(filteredPeople, howManyResults());
     displayContent(0);
     result = -result;
 
   } else {
     filteredPeople.sort((a, b) => a[elementProperty] > b[elementProperty] ? [result] : -[result]);
-    sliceArray(filteredPeople, 5);
+    sliceArray(filteredPeople, howManyResults());
     displayContent(0);
     result = -result;
   }
@@ -130,21 +131,24 @@ function findMatches(wordToMatch, arr) {
 
 function displayMatches(){
   findMatches(this.value, people);
-  sliceArray(filteredPeople, 5);
+  sliceArray(filteredPeople, howManyResults());
   displayContent(0);
 }
 
-
+function howManyResults(){
+  const resultsInput = document.querySelector('.results-per-page');
+  const inputLength = resultsInput.value.length;
+  const results = parseInt(resultsInput.value);
+  if (inputLength == 0 || results === '0') {
+    return 5;
+  } else {
+    return results;
+  }
+}
 
 function resultsPerPage(){
-  const results = this.value;
-  if (results == /\s/ || results == 0) {
-    sliceArray(filteredPeople, 5);
-    displayContent(0);
-  } else {
-    sliceArray(filteredPeople, results);
-    displayContent(0);
-  }
+  sliceArray(filteredPeople, howManyResults());
+  displayContent(0)
 }
 
 function sortListeners() {

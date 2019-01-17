@@ -11,8 +11,17 @@
 <body>
     <div class="content-wrapper">
          <div class="content-input-container">
-             <input type="text" class="search" name="something" placeholder="Search">
-             <input type="text" class="results-per-page" name="something" placeholder="Results per page">
+             <input type="text" class="search" name="something" placeholder="Search" autocomplete="off">
+         <span>Results per page:</span>
+             <select class="results-per-page" name="something" placeholder="Results per page">
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5" selected="selected">5</option>
+                 <option value="10">10</option>
+                 <option value="20">20</option>
+            </select>
              <div class="datepicker"></div>
         </div>
         <div class="content-table-container">
@@ -30,7 +39,6 @@
                 <tbody class="suggestions" id="table1">
                 </tbody>
             </table>
-
 
         </div>
     </div>
