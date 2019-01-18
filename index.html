@@ -2,46 +2,53 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table sorter</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,800" rel="stylesheet">
 </head>
 
 <body>
-    <div class="content-wrapper">
-         <div class="content-input-container">
-             <input type="text" class="search" name="something" placeholder="Search" autocomplete="off">
-         <span>Results per page:</span>
-             <select class="results-per-page" name="something" placeholder="Results per page">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-                 <option value="5" selected="selected">5</option>
-                 <option value="10">10</option>
-                 <option value="20">20</option>
+    <div class="wrapper">
+    <h1 class="heading">Yup. Another table<br>sorting app.</h1>
+    <div class="table">
+
+        <div class="table__inputs">
+            <input type="text" class="table__search" placeholder="Search" autocomplete="off">
+            <span class="table__results-text">Results per page:</span>
+            <select class="table__results" placeholder="Results per page">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected="selected">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
             </select>
-             <div class="datepicker"></div>
-        </div>
-        <div class="content-table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th data-property="id" class="table-head">id</th>
-                        <th data-property="firstName" class="table-head">first name</th>
-                        <th data-property="lastName" class="table-head">last name</th>
-                        <th data-property="dateOfBirth" class="table-head">date of birth</th>
-                        <th data-property="function" class="table-head">function</th>
-                        <th data-property="experience" class="table-head">experience</th>
-                    </tr>
-                </thead>
-                <tbody class="suggestions" id="table1">
-                </tbody>
-            </table>
 
         </div>
+
+        <table class="table__container">
+
+            <thead>
+                <tr>
+                    <th data-property="id" class="table__header">Id</th>
+                    <th data-property="firstName" class="table__header">First name</th>
+                    <th data-property="lastName" class="table__header">Last name</th>
+                    <th data-property="dateOfBirth" class="table__header">Date of birth</th>
+                    <th data-property="function" class="table__header">Function</th>
+                    <th data-property="experience" class="table__header">Experience</th>
+                </tr>
+            </thead>
+
+            <tbody class="table__content"></tbody>
+
+        </table>
+
+        <div class="page-buttons"></div>
     </div>
+</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
